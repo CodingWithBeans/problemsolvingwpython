@@ -53,31 +53,27 @@ ax.set_title('Lagranges Mean Value')
 ax.grid(True)
 ax.legend()
 
-slider_ax_a = plt.axes([0.15, 0.1, 0.7, 0.03])
-slider_ax_b = plt.axes([0.15, 0.05, 0.7, 0.03])
+def createSlider(gridY, name, index, colour):
 
-aPointSlider = Slider(
-    slider_ax_a,
-    "point A",
+    sliderGrid = plt.axes([0.15, gridY, 0.7, 0.03])
+
+    pointSlider = Slider(
+    sliderGrid,
+    name,
     valmin=0,
     valmax=len(xVals)-1,
-    valinit=aIndex,
+    valinit=index,
     valstep=1,
-    track_color="#ff0000"
+    track_color=colour
     )
-aPointSlider.valtext.set_visible(False)
 
+    pointSlider.valtext.set_visible(False)
 
-bPointSlider = Slider(
-    slider_ax_b,
-    "point B",
-    valmin=1,
-    valmax=len(xVals)-1,
-    valinit=bIndex,
-    valstep=1,
-    initcolor="#8800ff"
-    )
-bPointSlider.valtext.set_visible(False)
+    return pointSlider
+
+def getGradOfAB():
+
+    return (bPointyVal - aPointyVal) / (bPointxVal - aPointxVal)
 
 def updateLinearAB():
     
@@ -88,6 +84,7 @@ def updateLinearAB():
     fig.canvas.draw_idle()
 
 def updateASlider(val):
+
     index = int(aPointSlider.val)
     aPointxVal = xVals[index]
     aPointyVal = yVals[index]
@@ -95,11 +92,15 @@ def updateASlider(val):
     updateLinearAB()
 
 def updateBSlider(val):
+
     index = int(bPointSlider.val)
     bPointxVal = xVals[index]
     bPointyVal = yVals[index]
     bpoint.set_data([bPointxVal], [bPointyVal])
     updateLinearAB()
+
+aPointSlider, bPointSlider = createSlider(0.1, "Point A", aIndex, "#ff0000"), createSlider(0.05, "Point B", bIndex, "#8800ff")
+
 
 aPointSlider.on_changed(updateASlider)
 bPointSlider.on_changed(updateBSlider)
