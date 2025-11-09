@@ -2,20 +2,26 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider
 
+#initial graph values
 xVals = np.linspace(-1, 2.25, 10000)
-yVals = (3*(xVals**4)) - (8*(xVals**3)) +(2*(xVals**2))+(6*(xVals)) + 2
+yVals = (3*(xVals**4)) - (8*(xVals**3)) + (2*(xVals**2)) + (6*(xVals)) + 2
 
+#setting index values for sliders probs move this to the function
 aIndex, bIndex = 0, (len(xVals) -1)
 
+#setting apoints x and y values
 aPointxVal, aPointyVal = xVals[aIndex], yVals[aIndex]
 
+#setting bpoint x and y valuues can probs also move this to function tbh
 bPointxVal, bPointyVal = xVals[bIndex], yVals[bIndex]
 
+#creating figure and axis
 fig, ax = plt.subplots(figsize=(8, 8))
 ax.set_xlim(-2, 3)
 ax.set_ylim(0, 12)
 plt.subplots_adjust(bottom=0.25)
 
+#creating curve object
 curve, = ax.plot(
     xVals,
     yVals,
@@ -23,6 +29,7 @@ curve, = ax.plot(
     color="#000000"
     )
 
+#creating apoint object
 apoint, = ax.plot(
     aPointxVal,
     aPointyVal,
@@ -31,6 +38,7 @@ apoint, = ax.plot(
     color="#ff0000"
     )
 
+#creating bpoint object
 bpoint, = ax.plot(
     bPointxVal,
     bPointyVal,
@@ -39,6 +47,7 @@ bpoint, = ax.plot(
     color="#8800ff"
     )
 
+#creating a line from points a to b
 abLinearLine, = ax.plot(
     [aPointxVal, bPointxVal],
     [aPointyVal, bPointyVal],
@@ -47,14 +56,25 @@ abLinearLine, = ax.plot(
     label="Linear AB Line"
 )
 
+#setting labels etc
 ax.set_xlabel('x')
 ax.set_ylabel('y')
 ax.set_title('Lagranges Mean Value')
 ax.grid(True)
 ax.legend()
 
-def createSlider(gridY, name, index, colour):
 
+def createSlider(gridY, name, index, colour):
+    """creating sliders\n
+    ************************************ \n
+    variables:\n
+        gridY : float value -> for bottom passed into plt.axis-> 4-tuple of floats rect = (left, bottom, width, height)\n
+        name : string value -> naming point on the legend\n
+        index : int values -> value of the slider given as a index of the list of xVals, yVals\n
+        colour : string value -> pass hex value for colour of the point\n
+    ************************************ \n
+    Function creates the grid object for the sldier to live in, it then creates a slider for the point A or B setting value max as the length of xvals - 1 \n
+    Function returns pointSlider Object"""
     sliderGrid = plt.axes([0.15, gridY, 0.7, 0.03])
 
     pointSlider = Slider(
@@ -100,7 +120,6 @@ def updateBSlider(val):
     updateLinearAB()
 
 aPointSlider, bPointSlider = createSlider(0.1, "Point A", aIndex, "#ff0000"), createSlider(0.05, "Point B", bIndex, "#8800ff")
-
 
 aPointSlider.on_changed(updateASlider)
 bPointSlider.on_changed(updateBSlider)
