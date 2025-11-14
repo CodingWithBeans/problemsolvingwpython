@@ -37,5 +37,5 @@ for y in years:
     # and add the max KP for y to max_kps
     max_kps.append(year_data['KP'].max())
 
-significant_years = [i for i in range(data['Year'].max())]
-print(significant_years)
+significant_years = {i for i in range(data['Year'].min(), (data['Year'].max() + 1))}
+print(significant_years, type(significant_years))
