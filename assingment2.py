@@ -13,7 +13,7 @@ plottingdata = df["KP"]
 
 print(data.describe(), plottingdata.describe())
 
-   
+#need to go nd add titles etc but basic set up is there
 count, bins, patches = plt.hist(plottingdata, bins=28)
 colormap = plt.get_cmap('rainbow', len(patches))
 
@@ -33,4 +33,9 @@ max_kps = []
 for y in years:
 
     # ADD CODE BELOW to get the data for year y
+    year_data = data[data['Year'] == y]
     # and add the max KP for y to max_kps
+    print(type(year_data), year_data)
+    yearmax = year_data['KP'].max()
+    print(yearmax)
+    
