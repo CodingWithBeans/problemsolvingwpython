@@ -36,6 +36,5 @@ for y in years:
     year_data = data[data['Year'] == y]
     # and add the max KP for y to max_kps
     print(type(year_data), year_data)
-    yearmax = year_data['KP'].max()
-    print(yearmax)
-    max_kps.append(yearmax)
+    max_kps.append(year_data['KP'].max())
+print(max_kps, str(max_kps) == "[np.float64(9.0), np.float64(7.667), np.float64(9.0), np.float64(8.333), np.float64(8.667), np.float64(7.667), np.float64(8.333), np.float64(7.333), np.float64(8.333), np.float64(8.0), np.float64(7.667), np.float64(8.333), np.float64(9.0), np.float64(8.333), np.float64(8.0), np.float64(8.333), np.float64(9.0), np.float64(7.0), np.float64(8.0), np.float64(9.0), np.float64(8.333), np.float64(8.667), np.float64(8.667), np.float64(7.667), np.float64(8.333), np.float64(8.0), np.float64(7.333), np.float64(7.333), np.float64(8.667), np.float64(8.0), np.float64(9.0), np.float64(8.667), np.float64(8.333), np.float64(9.0), np.float64(8.667), np.float64(8.667), np.float64(8.333), np.float64(5.667), np.float64(6.333), np.float64(5.667), np.float64(7.667), np.float64(7.667), np.float64(8.0), np.float64(7.667), np.float64(6.333), np.float64(8.333), np.float64(6.333), np.float64(8.333), np.float64(7.333), np.float64(6.333), np.float64(5.667), np.float64(7.667), np.float64(6.667), np.float64(8.333), np.float64(9.0)]")
