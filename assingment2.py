@@ -38,4 +38,4 @@ for y in years:
     print(type(year_data), year_data)
     yearmax = year_data['KP'].max()
     print(yearmax)
-    
+    max_kps.append(yearmax)
