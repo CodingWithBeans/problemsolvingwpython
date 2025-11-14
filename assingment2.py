@@ -36,3 +36,6 @@ for y in years:
     year_data = data[data['Year'] == y]
     # and add the max KP for y to max_kps
     max_kps.append(year_data['KP'].max())
+
+significant_years = [i for i in range(data['Year'].max())]
+print(significant_years)
