@@ -37,5 +37,9 @@ for y in years:
     # and add the max KP for y to max_kps
     max_kps.append(year_data['KP'].max())
 
-significant_years = {i for i in range(data['Year'].min(), (data['Year'].max() + 1))}
+#significant_years = set(data.loc[data['KP'] == data['KP'].max(), 'Year'])
+
+significant_years = {year for year in range(data['Year'].min(), data['Year'].max() + 1) if any(data.loc[data['Year'] == year, 'KP'] == data['KP'].max())}
 print(significant_years, type(significant_years))
+
+print(data.iloc[1])
